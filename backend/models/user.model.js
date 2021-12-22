@@ -9,7 +9,20 @@ const userSchema = new Schema({
         unique: true, 
         trim: true,
         minlength: 3
+},
+    password_digest: {
+        type: String,
+        required: true.email,
+        unique: true,
+        trim: true
     },
+    email: {
+        type: String,
+        required: true,
+        unique: true, 
+        trim: true
+    }
+    
 }, {
     timestamps: true,
 });
