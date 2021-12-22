@@ -1,7 +1,13 @@
 import React from 'react'
-import "bootstrap/dist/css/bootstrap.min.css"
+// import "bootstrap/dist/css/bootstrap.min.css"
+import './login.css'
+import * as mdb from 'mdb-ui-kit';
+window.mdb = mdb;
 
-
+document.querySelectorAll('.form-outline').forEach((formOutline) => {
+    new mdb.Input(formOutline).init();
+  });
+  
 
 
 export default function Login() {
@@ -15,9 +21,11 @@ export default function Login() {
                     <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
                         <form>
                             <div class="form-outline mb-4">
-                                <input type="email" id="form1Example13" class="form-control form-control-lg" />
-                                <label class="form-label" for="form1Example13">Email address</label>
+                                <input type="email" id="form12" class="form-control form-control-lg" />
+                                <label class="form-label" for="form12">Email address</label>
                             </div>
+                            
+                            
 
 
                             <div class="form-outline mb-4">
@@ -51,7 +59,6 @@ export default function Login() {
                             </a>
                             <a class="btn btn-primary btn-lg btn-block" style={{backgroundColor: '#55acee'}} href="#!" role="button">
                                 <i class="fab fa-twitter me-2"></i>Continue with Twitter</a>
-
                         </form>
                     </div>
                 </div>
