@@ -28,11 +28,11 @@ app.post('/register', async (req, res) => {
     console.log(req.body)
     try {
         const user = await User.create({
-            name: req.body.name,
+            username: req.body.username,
             email: req.body.email,
             password: req.body.password
         })
-        res.json({ status: 'ok' })
+        res.json({ status: 'register successful' })
     } catch (err) {
         res.json({ status: 'error', error: 'Duplicate'})
     }
@@ -40,12 +40,14 @@ app.post('/register', async (req, res) => {
 
 app.post('/login', async (req, res) => {
 
-       const user = await User.findOne({ email: req.body.email, password: req.body.password })
-        res.json({ status: 'ok' })
-        res.json({ status: 'error', error: 'Duplicate'})
+    console.log(req.body)
+       const user = await User.findOne({ email: req.body.email, })
+        if (!user) {
+            return { status: 'error', error: 'Invalid login' }
+        }
 
         if (user) {
-            return res.json({ status: 'ok', user: true })
+            return res.json({ status: 'login successful', user: true })
         } else {
             return res.json({ status:'error', user:false})
         }

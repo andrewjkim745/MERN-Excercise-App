@@ -10,10 +10,9 @@ const userSchema = new Schema({
         trim: true,
         minlength: 3
 },
-    password_digest: {
+    password: {
         type: String,
-        required: true.email,
-        unique: true,
+        required: true,
         trim: true
     },
     email: {
