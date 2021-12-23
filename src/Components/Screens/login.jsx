@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 // import "bootstrap/dist/css/bootstrap.min.css"
 import './login.css'
 import * as mdb from 'mdb-ui-kit';
@@ -7,11 +7,17 @@ window.mdb = mdb;
 
 
 export default function Login() {
+
+    const [username, setUsername ] = useState('')
+    const [email, setEmail ] = useState('')
+    const [password, setPassword] = useState('')
+    const [register, setRegister] = useState('Login')
+
     useEffect(() => {
         document.querySelectorAll('.form-outline').forEach((formOutline) => {
             new mdb.Input(formOutline).init();
           });
-    })
+    },[])
 
     return (
         <section class="vh-100">
@@ -22,7 +28,14 @@ export default function Login() {
                     </div>
                     
                     <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                        <div class='container py-3 text-nowrap text-center'>
+                            <h2>MERN Exercise {register}</h2>
+                        </div>
                         <form>
+                        <div class={register === 'Login' ? 'displayNone' : "form-outline mb-4"}>
+                                <input type="email" id="form12" class="form-control form-control-lg" />
+                                <label class="form-label" for="form12">Username</label>
+                            </div>
                             <div class="form-outline mb-4">
                                 <input type="email" id="form12" class="form-control form-control-lg" />
                                 <label class="form-label" for="form12">Email address</label>
@@ -50,15 +63,16 @@ export default function Login() {
 
                             <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
 
-                            <div class="divider d-flex align-items-center my-4">
+                            <div class = "divider d-flex align-items-center my-4">
                                 <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
                             </div>
 
-                            <a class="btn btn-primary btn-lg btn-block" style={{backgroundColor: '#3b5998'}} href="#!" role="button">
-                                <i class="fab fa-facebook-f me-2"></i>Continue with Facebook
+                            <a onClick={() => setRegister('Register')} class={register === 'Register' ? 'displayNone' :"btn btn-primary btn-lg btn-block"} style={{backgroundColor: '#3b5998'}}  role="button">
+                            <i class="fa fa-registered me-2" aria-hidden="true"></i>Register
                             </a>
-                            <a class="btn btn-primary btn-lg btn-block" style={{backgroundColor: '#55acee'}} href="#!" role="button">
-                                <i class="fab fa-twitter me-2"></i>Continue with Twitter</a>
+                            <a onClick={() => setRegister('Login')} class={register === 'Login' ? 'displayNone' :"btn btn-primary btn-lg btn-block"} style={{backgroundColor: '#3b5998'}}  role="button">
+                            Login
+                            </a>
                         </form>
                     </div>
                 </div>
