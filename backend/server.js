@@ -44,8 +44,7 @@ app.post('/register', async (req, res) => {
 
 app.post('/login', async (req, res) => {
 
-    console.log(req.body)
-       const user = await User.findOne({ email: req.body.email, password: req.body.password })
+       const user = await User.findOne({ email: req.body.email })
         if (!user) {
             return { status: 'error', error: 'Invalid login' }
         }

@@ -19,7 +19,7 @@ export default function Login() {
     }, [])
 
     async function registerUser(event) {
-
+        event.preventDefault()
         const response = await fetch('http://localhost:5000/register', {
             method: 'POST',
             headers: {
@@ -28,13 +28,12 @@ export default function Login() {
             body: JSON.stringify({
                 username, 
                 email, 
-                password
+                password,
             }),
         })
 
         const data = await response.json()
 
-        console.log(data)
         alert("Register Success!")
         if (data.status = 'register successful') {
             setRegister('Login')
@@ -50,18 +49,19 @@ export default function Login() {
             },
             body: JSON.stringify({
                 email,
-                password
+                password,
             }),
         })
 
         const data = await response.json()
+
         if(data.user) {
+            localStorage.setItem('token', data.user)
             alert('Login Successful!')
             window.location.href = '/home'
         } else {
             alert('Please check your username and password')
         }
-        console.log(data)
     }
 
 
@@ -76,7 +76,8 @@ export default function Login() {
                         <div class='container py-3 text-nowrap text-center'>
                             <h2>MERN Exercise {register}</h2>
                         </div>
-                        <form onSubmit={register === 'Register' ? registerUser() : loginUser()}>
+                        <form onSubmit={register === 'Register' ? registerUser : loginUser}>
+                        {/* <form onSubmit={loginUser}> */}
                             <div class={register === 'Login' ? 'form-outline mb-4 displayNone' : "form-outline mb-4"}>
                                 <input onChange={(e) => setUsername(e.target.value)} value={username} type="username" id="form12" class="form-control form-control-lg" />
                                 <label class="form-label" for="form12">Username</label>
