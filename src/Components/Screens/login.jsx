@@ -1,16 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 // import "bootstrap/dist/css/bootstrap.min.css"
 import './login.css'
 import * as mdb from 'mdb-ui-kit';
 window.mdb = mdb;
 
-document.querySelectorAll('.form-outline').forEach((formOutline) => {
-    new mdb.Input(formOutline).init();
-  });
-  
 
 
 export default function Login() {
+    useEffect(() => {
+        document.querySelectorAll('.form-outline').forEach((formOutline) => {
+            new mdb.Input(formOutline).init();
+          });
+    })
+
     return (
         <section class="vh-100">
             <div class="container py-5 h-100">
@@ -18,6 +20,7 @@ export default function Login() {
                     <div class="col-md-8 col-lg-7 col-xl-6">
                         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" class="img-fluid" alt="Phone image"/>
                     </div>
+                    
                     <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
                         <form>
                             <div class="form-outline mb-4">
@@ -25,9 +28,6 @@ export default function Login() {
                                 <label class="form-label" for="form12">Email address</label>
                             </div>
                             
-                            
-
-
                             <div class="form-outline mb-4">
                                 <input type="password" id="form1Example23" class="form-control form-control-lg" />
                                 <label class="form-label" for="form1Example23">Password</label>
@@ -66,3 +66,7 @@ export default function Login() {
         </section>
     )
 }
+
+
+
+
