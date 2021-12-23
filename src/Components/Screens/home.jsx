@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 // import jwt from 'jsonwebtoken'
-
+import Rat from '../../assets/rat.png'
 import { useNavigate } from 'react-router-dom'
 import Navbar from './Shared/navbar'
-
 
 
 
@@ -33,11 +32,11 @@ export default function Home() {
 
         const token = localStorage.getItem('token')
         if (token) {
-            // const user = jwt.decode(token)
-            if (!user) {
-                localStorage.removeItem('token')
-                navigate('/login')
-            }
+            const user = (token)
+            // if (!user) {
+            //     localStorage.removeItem('token')
+            //     navigate('/')
+            // }
         } else {
             populateUser()
         }
@@ -45,6 +44,9 @@ export default function Home() {
     return (
         <>
         <Navbar/>
+        <div class='container-fluid py-5'>
+        <img style={{ width: 1000}} src={Rat}></img>
+        </div>
         </>
     )
 }
