@@ -1,6 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs')
+
 
 
 require('dotenv').config();
@@ -27,10 +30,11 @@ app.use('/users', usersRouter);
 app.post('/register', async (req, res) => {
     console.log(req.body)
     try {
-        const user = await User.create({
+        const newPassword = await bcrypt.hash(req.body.password, 10)
+        await User.create({
             username: req.body.username,
             email: req.body.email,
-            password: req.body.password
+            password: newPassword
         })
         res.json({ status: 'register successful' })
     } catch (err) {
@@ -41,15 +45,27 @@ app.post('/register', async (req, res) => {
 app.post('/login', async (req, res) => {
 
     console.log(req.body)
-       const user = await User.findOne({ email: req.body.email, })
+       const user = await User.findOne({ email: req.body.email, password: req.body.password })
         if (!user) {
             return { status: 'error', error: 'Invalid login' }
         }
-
-        if (user) {
-            return res.json({ status: 'login successful', user: true })
+        const isPasswordValid = await bcrypt.compare(
+            req.body.password,
+            user.password
+        )
+    
+        if (isPasswordValid) {
+            const token = jwt.sign(
+                {
+                    username: user.username,
+                    email: user.email,
+                },
+                'secret123'
+            )
+    
+            return res.json({ status: 'ok', user: token })
         } else {
-            return res.json({ status:'error', user:false})
+            return res.json({ status: 'error', user: false })
         }
     })
 

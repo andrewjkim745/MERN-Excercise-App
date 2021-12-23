@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react'
+import React, { useEffect, useState } from 'react'
 // import "bootstrap/dist/css/bootstrap.min.css"
 import './login.css'
 import * as mdb from 'mdb-ui-kit';
@@ -7,45 +7,89 @@ window.mdb = mdb;
 
 
 export default function Login() {
-
-    const [username, setUsername ] = useState('')
-    const [email, setEmail ] = useState('')
+    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [register, setRegister] = useState('Login')
 
     useEffect(() => {
         document.querySelectorAll('.form-outline').forEach((formOutline) => {
             new mdb.Input(formOutline).init();
-          });
-    },[])
+        });
+    }, [])
+
+    async function registerUser(event) {
+
+        const response = await fetch('http://localhost:5000/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username, 
+                email, 
+                password
+            }),
+        })
+
+        const data = await response.json()
+
+        console.log(data)
+        alert("Register Success!")
+        if (data.status = 'register successful') {
+            setRegister('Login')
+        }
+    }
+
+    async function loginUser(event) {
+        event.preventDefault()
+        const response = await fetch('http://localhost:5000/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email,
+                password
+            }),
+        })
+
+        const data = await response.json()
+        if(data.user) {
+            alert('Login Successful!')
+            window.location.href = '/home'
+        } else {
+            alert('Please check your username and password')
+        }
+        console.log(data)
+    }
+
 
     return (
         <section class="vh-100">
             <div class="container py-5 h-100">
                 <div class="row d-flex align-items-center justify-content-center h-100">
                     <div class="col-md-8 col-lg-7 col-xl-6">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" class="img-fluid" alt="Phone image"/>
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" class="img-fluid" alt="Phone image" />
                     </div>
-                    
                     <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
                         <div class='container py-3 text-nowrap text-center'>
                             <h2>MERN Exercise {register}</h2>
                         </div>
-                        <form>
-                        <div class={register === 'Login' ? 'form-outline mb-4 displayNone' : "form-outline mb-4"}>
-                                <input type="email" id="form12" class="form-control form-control-lg" />
+                        <form onSubmit={register === 'Register' ? registerUser() : loginUser()}>
+                            <div class={register === 'Login' ? 'form-outline mb-4 displayNone' : "form-outline mb-4"}>
+                                <input onChange={(e) => setUsername(e.target.value)} value={username} type="username" id="form12" class="form-control form-control-lg" />
                                 <label class="form-label" for="form12">Username</label>
                             </div>
                             <div class="form-outline mb-4">
-                                <input type="email" id="form12" class="form-control form-control-lg" />
+                                <input onChange={(e) => setEmail(e.target.value)} value={email} type="email" id="form12" class="form-control form-control-lg" />
                                 <label class="form-label" for="form12">Email address</label>
                             </div>
-                            
+
                             <div class="form-outline mb-4">
-                                <input type="password" id="form1Example23" class="form-control form-control-lg" />
+                                <input onChange={(e) => setPassword(e.target.value)} value={password} type="password" id="form1Example23" class="form-control form-control-lg" />
                                 <label class="form-label" for="form1Example23">Password</label>
                             </div>
-
                             <div class="d-flex justify-content-around align-items-center mb-4">
 
                                 <div class="form-check">
@@ -60,18 +104,16 @@ export default function Login() {
                                 </div>
                                 <a href="#!">Forgot password?</a>
                             </div>
-
                             <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
 
-                            <div class = "divider d-flex align-items-center my-4">
+                            <div class="divider d-flex align-items-center my-4">
                                 <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
                             </div>
-
-                            <a onClick={() => setRegister('Register')} class={register === 'Register' ? 'displayNone' :"btn btn-primary btn-lg btn-block"} style={{backgroundColor: '#3b5998'}}  role="button">
-                            <i class="fa fa-registered me-2" aria-hidden="true"></i>Register
+                            <a onClick={() => setRegister('Register')} class={register === 'Register' ? 'displayNone' : "btn btn-primary btn-lg btn-block"} style={{ backgroundColor: '#3b5998' }} role="button">
+                                <i class="fa fa-registered me-2" aria-hidden="true"></i>Register
                             </a>
-                            <a onClick={() => setRegister('Login')} class={register === 'Login' ? 'displayNone' :"btn btn-primary btn-lg btn-block"} style={{backgroundColor: '#3b5998'}}  role="button">
-                            Login
+                            <a onClick={() => setRegister('Login')} class={register === 'Login' ? 'displayNone' : "btn btn-primary btn-lg btn-block"} style={{ backgroundColor: '#3b5998' }} role="button">
+                                Login
                             </a>
                         </form>
                     </div>

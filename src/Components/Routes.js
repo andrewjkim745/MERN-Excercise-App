@@ -1,12 +1,8 @@
 import React from 'react' 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Login from './Screens/login'
-import * as mdb from 'mdb-ui-kit';
-window.mdb = mdb;
+import Home from './Screens/home'
 
-document.querySelectorAll('.form-outline').forEach((formOutline) => {
-    new mdb.Input(formOutline).init();
-  });
 
 export default function Routing() {
 
@@ -14,6 +10,7 @@ export default function Routing() {
         <Router>
             <Routes>
             <Route exact path='/' element={<Login/>}/>
+            <Route exact path='/home' element={<Home/>}/>
             </Routes>
         </Router>
     )
