@@ -20,7 +20,11 @@ const userSchema = new Schema({
         required: true,
         unique: true, 
         trim: true
-    }
+    },
+    exercises: [{
+        type: Schema.Types.ObjectId,
+        ref: "Exercise"
+    }]
     
 }, {
     timestamps: true,
