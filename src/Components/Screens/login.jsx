@@ -32,7 +32,7 @@ export default function Login() {
                             <h2>MERN Exercise {register}</h2>
                         </div>
                         <form>
-                        <div class={register === 'Login' ? 'displayNone' : "form-outline mb-4"}>
+                        <div class={register === 'Login' ? 'form-outline mb-4 displayNone' : "form-outline mb-4"}>
                                 <input type="email" id="form12" class="form-control form-control-lg" />
                                 <label class="form-label" for="form12">Username</label>
                             </div>
