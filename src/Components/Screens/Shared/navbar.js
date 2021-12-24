@@ -16,7 +16,7 @@ export default function Navbar() {
     return (
         <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand">Mern</a>
+                <a class="navbar-brand">MERN Exercise</a>
                 <button type='button' class='btn btn-primary' onClick={()=> {
                     localStorage.clear()
                     navigate('/')

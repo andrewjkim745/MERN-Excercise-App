@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react'
 import Rat from '../../assets/rat.png'
 import { useNavigate } from 'react-router-dom'
 import Navbar from './Shared/navbar'
-
+import Sidebar from './Shared/sidebar'
+import Esther from '../../assets/lp_image.jpg'
 
 
 export default function Home() {
@@ -43,10 +44,10 @@ export default function Home() {
     }, [])
     return (
         <>
+        <Sidebar/>
         <Navbar/>
-        <div class='container-fluid py-5'>
-        <img style={{ width: 1000}} src={Rat}></img>
-        </div>
+        <img style={{ width: 1000, marginLeft: 500, zIndex: -9000}} src={Esther}></img>
+        
         </>
     )
 }
