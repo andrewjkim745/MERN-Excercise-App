@@ -46,7 +46,7 @@ export default function Home() {
         <>
         <Sidebar/>
         <Navbar/>
-        <img style={{ width: 1000, marginLeft: 500, zIndex: -9000}} src={Esther}></img>
+        {/* <img style={{ width: 1000, marginLeft: 500, zIndex: -9000}} src={Esther}></img> */}
         
         </>
     )
