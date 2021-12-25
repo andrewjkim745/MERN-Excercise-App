@@ -54,15 +54,15 @@ app.post('/login', async (req, res) => {
         )
     
         if (isPasswordValid) {
-            const token = jwt.sign(
-                {
+            const userData = {
+                // {
                     username: user.username,
                     email: user.email,
-                },
-                'secret123'
-            )
+                }
+                // 'secret123'
+            // )
     
-            return res.json({ status: 'ok', user: token })
+            return res.json({ status: 'ok', user: userData })
         } else {
             return res.json({ status: 'error', user: false })
         }

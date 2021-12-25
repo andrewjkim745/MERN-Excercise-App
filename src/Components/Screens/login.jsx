@@ -54,10 +54,9 @@ export default function Login() {
         })
 
         const data = await response.json()
-        console.log(data)
-
+        console.log(data.user)
         if(data.user) {
-            localStorage.setItem('token', data.user)
+            localStorage.setItem('token', JSON.stringify(data.user))
             alert('Login Successful!')
             window.location.href = '/home'
         } else {

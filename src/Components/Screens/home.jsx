@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react'
-// import jwt from 'jsonwebtoken'
+// import JsCrypto from "jscrypto/es6"
+
+// import SHA256 from "jscrypto/es6/SHA256"
 import Rat from '../../assets/rat.png'
 import { useNavigate } from 'react-router-dom'
 import Navbar from './Shared/navbar'
 import Sidebar from './Shared/sidebar'
 import Esther from '../../assets/lp_image.jpg'
+import crypto from "crypto-js";
 
 
 export default function Home() {
+    // console.log(JsCrypto.SHA256.hash("test").toString());
 
     const navigate = useNavigate();
     const [user, setUser ] = useState('')
@@ -33,7 +37,13 @@ export default function Home() {
 
         const token = localStorage.getItem('token')
         if (token) {
-            const user = (token)
+            // const user = JsCrypto.AES.decrypt(token, "secret123")
+            // const cryptoInfo = crypto.AES.encrypt(JSON.stringify(token), "secret123")
+            // console.log(cryptoInfo)
+            // const info2 = crypto.AES.decrypt(cryptoInfo.toString(), "secret123").toString(crypto.enc.Utf8)
+            // console.log({ info2 })
+
+            console.log(token)
             // if (!user) {
             //     localStorage.removeItem('token')
             //     navigate('/')
