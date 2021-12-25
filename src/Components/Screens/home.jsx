@@ -25,11 +25,12 @@ export default function Home() {
         })
 
         const data = await req.json()
-        if (data.status === 'ok') {
-            console.log(data)
-        } else {
-            alert(data.error)
-        }
+        console.log(data)
+        // if (data.status === 'ok') {
+        //     console.log(data)
+        // } else {
+        //     alert(data.error)
+        // }
     }
 
 
@@ -42,8 +43,11 @@ export default function Home() {
             // console.log(cryptoInfo)
             // const info2 = crypto.AES.decrypt(cryptoInfo.toString(), "secret123").toString(crypto.enc.Utf8)
             // console.log({ info2 })
+            const userData = JSON.parse(token)
+            setUser(userData)
+            console.log(user)
+            // console.log(JSON.parse(user.token))
 
-            console.log(token)
             // if (!user) {
             //     localStorage.removeItem('token')
             //     navigate('/')
@@ -55,8 +59,9 @@ export default function Home() {
     return (
         <>
         <Sidebar/>
-        <Navbar/>
-        {/* <img style={{ width: 1000, marginLeft: 500, zIndex: -9000}} src={Esther}></img> */}
+        <Navbar
+        username={user.username}
+        />
         
         </>
     )

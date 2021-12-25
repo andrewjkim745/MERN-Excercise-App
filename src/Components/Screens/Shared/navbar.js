@@ -10,13 +10,13 @@ import { useNavigate } from 'react-router-dom'
 //     }
 //   }
 
-export default function Navbar() {
+export default function Navbar(props) {
     const navigate = useNavigate();
 
     return (
         <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand">MERN Exercise</a>
+                <a class="navbar-brand">{props.username}</a>
                 <button type='button' class='btn btn-primary' onClick={()=> {
                     localStorage.clear()
                     navigate('/')
