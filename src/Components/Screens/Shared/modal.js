@@ -26,12 +26,12 @@ export default function CreateModal() {
                 </Modal.Header>
                 <Modal.Body>
                     <form>
-                        <div class="form-group">
-                        <NumberPicker defaultValue={0} />;
+                        <div class="form-group mb-4">
+                            <h5>Exercise Duration</h5>
+                            <NumberPicker defaultValue={0} />
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
+                        <div class="form-group mb-4">
+                            <textarea placeholder='Exercise Description' class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                         </div>
                     </form>
                     <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
