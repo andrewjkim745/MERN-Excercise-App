@@ -12,6 +12,7 @@ export default function Home() {
 
     const navigate = useNavigate();
     const [user, setUser ] = useState('')
+    const [done, setDone ] = useState(false)
 
     async function populateUser() {
 
@@ -23,6 +24,7 @@ export default function Home() {
 
         const data = await req.json()
         console.log(data)
+        
         // if (data.status === 'ok') {
         //     console.log(data)
         // } else {
@@ -36,38 +38,29 @@ export default function Home() {
         const token = localStorage.getItem('token')
         if (token) {
             const user = jwt_decode(token)
-            // console.log(user.email)
-            console.log(user)
-            // const user = JsCrypto.AES.decrypt(token, "secret123")
-            // const cryptoInfo = crypto.AES.encrypt(JSON.stringify(token), "secret123")
-            // console.log(cryptoInfo)
-            // const info2 = crypto.AES.decrypt(cryptoInfo.toString(), "secret123").toString(crypto.enc.Utf8)
-            // console.log({ info2 })
-            // const userData = JSON.parse(token)
             setUser(user)
-            // console.log(user)
-            // console.log(JSON.parse(user.token))
-
-            // if (!user) {
-            //     localStorage.removeItem('token')
-            //     navigate('/')
-            // }
+            console.log(user)
+            setDone(true)
         } else {
             populateUser()
         }
     }, [])
     return (
         <>
-        <div class='d-flex'>
-        <Sidebar/>
-        <Exercises
-        userId={user.id}
-        />
-        </div>
-        <Navbar 
-         username={user.username}
-         />
-        
+        {done ?
+                <div class='d-flex justify-content-center align-items-center' style={{ height: '100vh'}}>
+                <Exercises
+                userId={user.id}
+                exercises={user.exercises.length === 0 ? <h1>You have not logged any exercises!</h1> : <h1>You have exercises</h1>}
+                />
+                <Sidebar
+                username={user.username}
+                />
+                </div>
+        :
+        <></>         
+        }
+
         </>
     )
 }
