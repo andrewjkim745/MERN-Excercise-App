@@ -8,7 +8,7 @@ import Navbar from './Shared/navbar'
 import Sidebar from './Shared/sidebar'
 import Esther from '../../assets/lp_image.jpg'
 import crypto from "crypto-js";
-
+import jwt_decode from "jwt-decode";
 
 export default function Home() {
     // console.log(JsCrypto.SHA256.hash("test").toString());
@@ -38,14 +38,17 @@ export default function Home() {
 
         const token = localStorage.getItem('token')
         if (token) {
+            const user = jwt_decode(token)
+            console.log(user.email)
+            console.log(user)
             // const user = JsCrypto.AES.decrypt(token, "secret123")
             // const cryptoInfo = crypto.AES.encrypt(JSON.stringify(token), "secret123")
             // console.log(cryptoInfo)
             // const info2 = crypto.AES.decrypt(cryptoInfo.toString(), "secret123").toString(crypto.enc.Utf8)
             // console.log({ info2 })
-            const userData = JSON.parse(token)
-            setUser(userData)
-            console.log(user)
+            // const userData = JSON.parse(token)
+            setUser(user)
+            // console.log(user)
             // console.log(JSON.parse(user.token))
 
             // if (!user) {
