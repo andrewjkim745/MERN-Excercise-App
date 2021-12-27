@@ -36,7 +36,7 @@ export default function Home() {
         const token = localStorage.getItem('token')
         if (token) {
             const user = jwt_decode(token)
-            console.log(user.email)
+            // console.log(user.email)
             console.log(user)
             // const user = JsCrypto.AES.decrypt(token, "secret123")
             // const cryptoInfo = crypto.AES.encrypt(JSON.stringify(token), "secret123")
@@ -61,12 +61,12 @@ export default function Home() {
         <div class='d-flex'>
         <Sidebar/>
         <Exercises
-        userId={user.iAt}
+        userId={user.id}
         />
         </div>
-        <Navbar
-        username={user.username}
-        />
+        <Navbar 
+         username={user.username}
+         />
         
         </>
     )
