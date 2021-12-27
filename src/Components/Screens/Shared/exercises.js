@@ -11,6 +11,7 @@ export default function Exercises(props) {
     const [description, setDescription ] = useState('')
     const [duration, setDuration ] = useState('')
     const [ date, setDate ] = useState('')
+    // const [ modal, setModal ] = useState(false)
     
 //     async function getExercises(event) {
 //         // event.preventDefault()
