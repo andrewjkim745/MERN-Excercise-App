@@ -3,6 +3,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs')
+const db = require('./models')
 
 
 
@@ -23,7 +24,8 @@ connection.once('open', () => {
 })
 const exercisesRouter = require('./routes/exercises');
 const usersRouter = require('./routes/users');
-const User = require('./models/user.model');
+// const User = require('./models/user.model');
+// const Exercise = require('./models/exercise.model');
 app.use('/exercises', exercisesRouter);
 app.use('/users', usersRouter);
 
@@ -31,7 +33,7 @@ app.post('/register', async (req, res) => {
     console.log(req.body)
     try {
         const newPassword = await bcrypt.hash(req.body.password, 10)
-        await User.create({
+        await db.User.create({
             username: req.body.username,
             email: req.body.email,
             password: newPassword
@@ -44,7 +46,7 @@ app.post('/register', async (req, res) => {
 
 app.post('/login', async (req, res) => {
 
-       const user = await User.findOne({ email: req.body.email })
+       const user = await db.User.findOne({ email: req.body.email })
         if (!user) {
             return { status: 'error', error: 'Invalid login' }
         }
@@ -53,16 +55,29 @@ app.post('/login', async (req, res) => {
             user.password
         )
     
+        // if (isPasswordValid) {
+        //     const userData = {
+        //         // {
+        //             username: user.username,
+        //             email: user.email,
+        //         }
+        //         // 'secret123'
+        //     // )
+    
+        //     return res.json({ status: 'ok', user: userData })
+        // } else {
+        //     return res.json({ status: 'error', user: false })
+        // }
         if (isPasswordValid) {
-            const userData = {
-                // {
+            const token = jwt.sign(
+                {
                     username: user.username,
                     email: user.email,
-                }
-                // 'secret123'
-            // )
+                },
+                'secret123'
+            )
     
-            return res.json({ status: 'ok', user: userData })
+            return res.json({ status: 'ok', user: token })
         } else {
             return res.json({ status: 'error', user: false })
         }
@@ -81,6 +96,30 @@ app.post('/login', async (req, res) => {
             console.log(error)
             res.json({ status: 'error', error: 'invalid token' })
         }
+    })
+
+    app.post('/users/:id', async (req, res) => {
+        db.Exercise.create(req.body)
+            .then(function(dbExercise) {
+                return db.User.findOneAndUpdate({_id: req.params.id }, {$push: {exercises: dbExercise._id}}, { new: true});
+            })
+            .then(function(dbUser) {
+                res.json(dbUser);
+            })
+            .catch(function(err) {
+                res.json(err);
+            })
+    })
+
+    app.get('/users/:id', async (req, res) => {
+        db.User.findOne({_id: req.params.id })
+        .populate('exercises')
+        .then(function(dbUser) {
+            res.json(dbUser);
+        })
+        .catch(function(err) {
+            res.json(err)
+        })
     })
     
 app.listen(port, () => {
