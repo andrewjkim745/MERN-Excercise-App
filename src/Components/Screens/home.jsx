@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react'
-// import JsCrypto from "jscrypto/es6"
-
-// import SHA256 from "jscrypto/es6/SHA256"
-import Rat from '../../assets/rat.png'
+import Exercises from './Shared/exercises'
 import { useNavigate } from 'react-router-dom'
 import Navbar from './Shared/navbar'
 import Sidebar from './Shared/sidebar'
@@ -11,7 +8,7 @@ import crypto from "crypto-js";
 import jwt_decode from "jwt-decode";
 
 export default function Home() {
-    // console.log(JsCrypto.SHA256.hash("test").toString());
+ 
 
     const navigate = useNavigate();
     const [user, setUser ] = useState('')
@@ -61,7 +58,12 @@ export default function Home() {
     }, [])
     return (
         <>
+        <div class='d-flex'>
         <Sidebar/>
+        <Exercises
+        userId={user.iAt}
+        />
+        </div>
         <Navbar
         username={user.username}
         />
