@@ -73,6 +73,8 @@ app.post('/login', async (req, res) => {
                 {
                     username: user.username,
                     email: user.email,
+                    id: user._id,
+                    exercises: user.exercises
                 },
                 'secret123'
             )
@@ -89,7 +91,7 @@ app.post('/login', async (req, res) => {
         try {
             const decoded = jwt.verify(token, 'secret123')
             const email = decoded.email
-            const user = await User.findOne({ email: email })
+            const user = await db.User.findOne({ email: email })
     
             return res.json({ status: 'ok', username: user.username })
         } catch (error) {
