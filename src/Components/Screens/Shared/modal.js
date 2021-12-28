@@ -25,10 +25,10 @@ export default function CreateModal(props) {
                     <form>
                         <div class="form-group mb-4">
                             <h5>Exercise Duration</h5>
-                            <NumberPicker defaultValue={props.defaultValue} />
+                            <NumberPicker value={props.numberValue} onChange={onNumberChange} defaultValue={props.defaultValue} />
                         </div>
                         <div class="form-group mb-4">
-                            <textarea onChange={props.onChange} placeholder='Exercise Description' class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <textarea value={props.descriptionValue} onChange={props.onChange} placeholder='Exercise Description' class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                         </div>
                     </form>
                     <DatePicker selected={props.startDate} onChange={props.changeDate} />

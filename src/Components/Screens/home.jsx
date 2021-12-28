@@ -9,15 +9,16 @@ export default function Home() {
 
 
     const navigate = useNavigate();
+    const [numberValue, setNumberValue] = useState(0)
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [startDate, setStartDate] = useState(new Date());
-
     const [description, setDescription ] = useState('')
     const [user, setUser] = useState('')
     const [done, setDone] = useState(false)
-    const [modal, setModal] = useState(false)
+
+
     async function populateUser() {
 
         const req = await fetch('http://localhost:5000/users', {
@@ -55,6 +56,9 @@ export default function Home() {
                                 <h1>You have not logged any exercises!</h1>
                                 <CreateModal 
                                     defaultValue={0}
+                                    numberValue={numberValue}
+                                    onNumberChange={numberValue => setNumberValue(numberValue)}
+                                    descriptionValue={description}
                                     onChange={(e) => setDescription(e.target.value)}
                                     onClick={handleClose}
                                     show={show}

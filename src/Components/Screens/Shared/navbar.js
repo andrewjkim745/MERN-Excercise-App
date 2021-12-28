@@ -16,11 +16,8 @@ export default function Navbar(props) {
     return (
         <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand">{props.username}</a>
-                <button type='button' class='btn btn-primary' onClick={()=> {
-                    localStorage.clear()
-                    navigate('/')
-                }}>Sign Out</button>
+                {/* <a class="navbar-brand">{props.username}</a> */}
+
             </div>
         </nav>
     )
