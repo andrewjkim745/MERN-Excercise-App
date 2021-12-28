@@ -9,14 +9,15 @@ export default function Home() {
 
 
     const navigate = useNavigate();
-    const [numberValue, setNumberValue] = useState(0)
+    const [duration, setDuration] = useState(0)
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [startDate, setStartDate] = useState(new Date());
+    const [date, setDate] = useState(new Date());
     const [description, setDescription ] = useState('')
     const [user, setUser] = useState('')
     const [done, setDone] = useState(false)
+    const [exercises, setExercises ] = useState('')
 
 
     async function populateUser() {
@@ -31,6 +32,43 @@ export default function Home() {
         console.log(data)
     }
 
+        async function getExercises() {
+        
+        const response = await fetch(`http://localhost:5000/users/${user.id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        const data = await response.json()
+        console.log(data)
+        setExercises(data.exercises)
+        console.log(exercises)
+        
+    }
+    async function handleSubmit(event) {
+        event.preventDefault()
+        const response = await fetch(`http://localhost:5000/users/${user.id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                duration,
+                date,
+                description
+            }),
+        })
+
+        const data = await response.json()
+        console.log(data)
+        if(data) {
+            alert('Create exercise success')
+        } else {
+            alert('Create exercise failed')
+        }
+    }
+
 
     useEffect(() => {
 
@@ -38,13 +76,13 @@ export default function Home() {
         if (token) {
             const user = jwt_decode(token)
             setUser(user)
-            console.log(user)
+            console.log(user.exercises)
             setDone(true)
-            
+            getExercises()
         } else {
             populateUser()
         }
-    }, [user])
+    }, [])
     return (
         <>
             {done ?
@@ -56,16 +94,17 @@ export default function Home() {
                                 <h1>You have not logged any exercises!</h1>
                                 <CreateModal 
                                     defaultValue={0}
-                                    numberValue={numberValue}
-                                    onNumberChange={numberValue => setNumberValue(numberValue)}
+                                    duration={duration}
+                                    onNumberChange={duration => setDuration(duration)}
                                     descriptionValue={description}
                                     onChange={(e) => setDescription(e.target.value)}
                                     onClick={handleClose}
                                     show={show}
                                     handleShow={handleShow}
                                     onHide={handleClose}
-                                    startDate={startDate}
-                                    changeDate={(date) => setStartDate(date)}
+                                    startDate={date}
+                                    changeDate={(date) => setDate(date)}
+                                    onSubmit={handleSubmit}
                                 />
                             </div>
 

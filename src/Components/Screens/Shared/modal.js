@@ -25,7 +25,7 @@ export default function CreateModal(props) {
                     <form>
                         <div class="form-group mb-4">
                             <h5>Exercise Duration</h5>
-                            <NumberPicker value={props.numberValue} onChange={onNumberChange} defaultValue={props.defaultValue} />
+                            <NumberPicker value={props.duration} onChange={props.onNumberChange} defaultValue={props.defaultValue} />
                         </div>
                         <div class="form-group mb-4">
                             <textarea value={props.descriptionValue} onChange={props.onChange} placeholder='Exercise Description' class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
@@ -37,7 +37,7 @@ export default function CreateModal(props) {
                     <Button variant="secondary" onClick={props.onClick}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={props.onClick}>
+                    <Button variant="primary" onClick={props.onSubmit}>
                         Save Changes
                     </Button>
                 </Modal.Footer>
