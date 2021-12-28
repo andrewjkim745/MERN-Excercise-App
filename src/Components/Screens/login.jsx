@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 // import "bootstrap/dist/css/bootstrap.min.css"
 import './login.css'
 import * as mdb from 'mdb-ui-kit';
+// import chad from '../../assets/chadmaguire.png'
 window.mdb = mdb;
 
 
@@ -56,7 +57,7 @@ export default function Login() {
         const data = await response.json()
         console.log(data.user)
         if(data.user) {
-            // localStorage.setItem('token', JSON.stringify(data.user))
+            
             localStorage.setItem('token', data.user)
             alert('Login Successful!')
             window.location.href = '/home'
@@ -72,13 +73,14 @@ export default function Login() {
                 <div class="row d-flex align-items-center justify-content-center h-100">
                     <div class="col-md-8 col-lg-7 col-xl-6">
                         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" class="img-fluid" alt="Phone image" />
+                        {/* <img src={chad} class="img-fluid" alt="Phone image" /> */}
+
                     </div>
                     <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
                         <div class='container py-3 text-nowrap text-center'>
                             <h2>MERN Exercise {register}</h2>
                         </div>
                         <form onSubmit={register === 'Register' ? registerUser : loginUser}>
-                        {/* <form onSubmit={loginUser}> */}
                             <div class={register === 'Login' ? 'form-outline mb-4 displayNone' : "form-outline mb-4"}>
                                 <input onChange={(e) => setUsername(e.target.value)} value={username} type="username" id="form12" class="form-control form-control-lg" />
                                 <label class="form-label" for="form12">Username</label>
@@ -106,7 +108,7 @@ export default function Login() {
                                 </div>
                                 <a href="#!">Forgot password?</a>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">{register === 'Register' ? 'Register' : 'Log In'}</button>
 
                             <div class="divider d-flex align-items-center my-4">
                                 <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>

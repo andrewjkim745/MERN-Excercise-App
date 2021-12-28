@@ -8,19 +8,16 @@ import "react-widgets/styles.css";
 import * as mdb from 'mdb-ui-kit';
 window.mdb = mdb;
 
-export default function CreateModal() {
-    const [show, setShow] = useState(false);
-    const [startDate, setStartDate] = useState(new Date());
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+export default function CreateModal(props) {
+
+    
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
+            <Button variant="primary" onClick={props.handleShow}>
                 CREATE ONE HERE
             </Button>
-
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={props.show} onHide={props.onHide}>
                 <Modal.Header closeButton>
                     <Modal.Title>Log your Exercise!</Modal.Title>
                 </Modal.Header>
@@ -28,19 +25,19 @@ export default function CreateModal() {
                     <form>
                         <div class="form-group mb-4">
                             <h5>Exercise Duration</h5>
-                            <NumberPicker defaultValue={0} />
+                            <NumberPicker defaultValue={props.defaultValue} />
                         </div>
                         <div class="form-group mb-4">
-                            <textarea placeholder='Exercise Description' class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <textarea onChange={props.onChange} placeholder='Exercise Description' class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                         </div>
                     </form>
-                    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+                    <DatePicker selected={props.startDate} onChange={props.changeDate} />
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="secondary" onClick={props.onClick}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
+                    <Button variant="primary" onClick={props.onClick}>
                         Save Changes
                     </Button>
                 </Modal.Footer>

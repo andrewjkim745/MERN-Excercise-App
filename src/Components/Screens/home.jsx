@@ -9,10 +9,15 @@ export default function Home() {
 
 
     const navigate = useNavigate();
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    const [startDate, setStartDate] = useState(new Date());
+
+    const [description, setDescription ] = useState('')
     const [user, setUser] = useState('')
     const [done, setDone] = useState(false)
     const [modal, setModal] = useState(false)
-    const [startDate, setStartDate] = useState(new Date());
     async function populateUser() {
 
         const req = await fetch('http://localhost:5000/users', {
@@ -23,12 +28,6 @@ export default function Home() {
 
         const data = await req.json()
         console.log(data)
-
-        // if (data.status === 'ok') {
-        //     console.log(data)
-        // } else {
-        //     alert(data.error)
-        // }
     }
 
 
@@ -54,14 +53,23 @@ export default function Home() {
                         exercises={user.exercises.length === 0 ?
                             <div class='text-center'>
                                 <h1>You have not logged any exercises!</h1>
-                                <CreateModal/>
+                                <CreateModal 
+                                    defaultValue={0}
+                                    onChange={(e) => setDescription(e.target.value)}
+                                    onClick={handleClose}
+                                    show={show}
+                                    handleShow={handleShow}
+                                    onHide={handleClose}
+                                    startDate={startDate}
+                                    changeDate={(date) => setStartDate(date)}
+                                />
                             </div>
 
                             : 
                             <h1>You have exercises</h1>}
                     />
                     <Sidebar
-                        username={user.username}
+                        username={user.username.charAt(0).toUpperCase() + user.username.slice(1)}
                     />
                     
                 </div> 
