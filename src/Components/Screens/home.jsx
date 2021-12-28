@@ -9,15 +9,16 @@ export default function Home() {
 
 
     const navigate = useNavigate();
+    const [updated, setUpdated] = useState(false)
     const [duration, setDuration] = useState(0)
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [date, setDate] = useState(new Date());
-    const [description, setDescription ] = useState('')
+    const [description, setDescription] = useState('')
     const [user, setUser] = useState('')
     const [done, setDone] = useState(false)
-    const [exercises, setExercises ] = useState('')
+    const [exercises, setExercises] = useState('')
 
 
     async function populateUser() {
@@ -29,23 +30,10 @@ export default function Home() {
         })
 
         const data = await req.json()
-        console.log(data)
+        // console.log(data)
     }
 
-        async function getExercises() {
-        
-        const response = await fetch(`http://localhost:5000/users/${user.id}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        })
-        const data = await response.json()
-        console.log(data)
-        setExercises(data.exercises)
-        console.log(exercises)
-        
-    }
+
     async function handleSubmit(event) {
         event.preventDefault()
         const response = await fetch(`http://localhost:5000/users/${user.id}`, {
@@ -62,11 +50,28 @@ export default function Home() {
 
         const data = await response.json()
         console.log(data)
-        if(data) {
+        if (data) {
             alert('Create exercise success')
+            handleClose()
+            setUpdated(!updated)
         } else {
             alert('Create exercise failed')
         }
+    }
+
+    async function getExercises() {
+
+        const response = await fetch(`http://localhost:5000/users/${user.id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        const data = await response.json()
+        console.log('data response from getExercises', data.exercises)
+        setExercises([...data.exercises])
+        console.log('exercises state', exercises)
+
     }
 
 
@@ -76,23 +81,26 @@ export default function Home() {
         if (token) {
             const user = jwt_decode(token)
             setUser(user)
-            console.log(user.exercises)
+            console.log('set user state')
+                getExercises()
             setDone(true)
-            getExercises()
+            console.log('user state exercises', user)
+
+
         } else {
             populateUser()
         }
-    }, [])
+    }, [updated])
     return (
         <>
             {done ?
                 <div class='d-flex justify-content-center align-items-center' style={{ height: '100vh' }}>
                     <Exercises
-                        userId={user.id}
+                        // userId={user.id}
                         exercises={user.exercises.length === 0 ?
                             <div class='text-center'>
                                 <h1>You have not logged any exercises!</h1>
-                                <CreateModal 
+                                <CreateModal
                                     defaultValue={0}
                                     duration={duration}
                                     onNumberChange={duration => setDuration(duration)}
@@ -108,18 +116,28 @@ export default function Home() {
                                 />
                             </div>
 
-                            : 
-                            <h1>You have exercises</h1>}
+                            :
+                            <>hello</>
+                            // exercises.map(exercise => {
+                            //     return (
+                            //         <>
+                            //             <h1>{exercise.description}</h1>
+                            //             <h1>{exercise.duration}</h1>
+                            //             <h1>{exercise.date}</h1>
+                            //         </>
+                            //     )
+                            // })
+                        }
                     />
                     <Sidebar
                         username={user.username.charAt(0).toUpperCase() + user.username.slice(1)}
                     />
-                    
-                </div> 
+
+                </div>
                 :
-                <></>
+                <><h1>Not done rendering</h1></>
             }
-            
+
         </>
     )
 }
