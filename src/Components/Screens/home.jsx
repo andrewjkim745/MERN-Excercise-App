@@ -121,7 +121,7 @@ export default function Home() {
                             // <>hello</>
                             exercises.map(exercise => {
                                 return (
-                                    <div class='d-flex-column'>
+                                    <div class='d-flex-column align-items-center'>
                                         <h1>{exercise.description}</h1>
                                         <h1>{exercise.duration}</h1>
                                         <h1>{exercise.date}</h1>
