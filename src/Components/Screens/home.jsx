@@ -49,11 +49,12 @@ export default function Home() {
         })
 
         const data = await response.json()
-        console.log(data)
+        console.log(data.exercises)
         if (data) {
             alert('Create exercise success')
             handleClose()
             setUpdated(!updated)
+            console.log('updated')
         } else {
             alert('Create exercise failed')
         }
@@ -82,9 +83,10 @@ export default function Home() {
             const user = jwt_decode(token)
             setUser(user)
             console.log('set user state')
-                getExercises()
+            getExercises()
             setDone(true)
-            console.log('user state exercises', user)
+            console.log('user state', user)
+            console.log('exercises state in useEffect', exercises)
 
 
         } else {
@@ -96,8 +98,7 @@ export default function Home() {
             {done ?
                 <div class='d-flex justify-content-center align-items-center' style={{ height: '100vh' }}>
                     <Exercises
-                        // userId={user.id}
-                        exercises={user.exercises.length === 0 ?
+                        exercises={exercises.length === 0 ?
                             <div class='text-center'>
                                 <h1>You have not logged any exercises!</h1>
                                 <CreateModal
@@ -117,16 +118,16 @@ export default function Home() {
                             </div>
 
                             :
-                            <>hello</>
-                            // exercises.map(exercise => {
-                            //     return (
-                            //         <>
-                            //             <h1>{exercise.description}</h1>
-                            //             <h1>{exercise.duration}</h1>
-                            //             <h1>{exercise.date}</h1>
-                            //         </>
-                            //     )
-                            // })
+                            // <>hello</>
+                            exercises.map(exercise => {
+                                return (
+                                    <div class='d-flex-column'>
+                                        <h1>{exercise.description}</h1>
+                                        <h1>{exercise.duration}</h1>
+                                        <h1>{exercise.date}</h1>
+                                    </div>
+                                )
+                            })
                         }
                     />
                     <Sidebar
