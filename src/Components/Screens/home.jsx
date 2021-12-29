@@ -60,7 +60,8 @@ export default function Home() {
         }
     }
 
-    async function getExercises() {
+    async function getExercises(user) {
+        console.log('in getExercises', user.id)
 
         const response = await fetch(`http://localhost:5000/users/${user.id}`, {
             method: 'GET',
@@ -68,6 +69,7 @@ export default function Home() {
                 'Content-Type': 'application/json'
             },
         })
+        console.log('waiting')
         const data = await response.json()
         console.log('data response from getExercises', data.exercises)
         setExercises([...data.exercises])
@@ -77,13 +79,13 @@ export default function Home() {
 
 
     useEffect(() => {
-
+        
         const token = localStorage.getItem('token')
         if (token) {
             const user = jwt_decode(token)
             setUser(user)
             console.log('set user state')
-            getExercises()
+            getExercises(user)
             setDone(true)
             console.log('user state', user)
             console.log('exercises state in useEffect', exercises)
