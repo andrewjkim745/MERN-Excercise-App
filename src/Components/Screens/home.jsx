@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import Sidebar from './Shared/sidebar'
 import jwt_decode from "jwt-decode";
 import CreateModal from './Shared/modal'
+import Card from './Shared/card'
 
 export default function Home() {
 
@@ -118,21 +119,39 @@ export default function Home() {
                             </div>
 
                             :
-                            // <>hello</>
+
                             exercises.map(exercise => {
                                 return (
-                                    <div class='d-flex-column align-items-center'>
-                                        <h1>{exercise.description}</h1>
-                                        <h1>{exercise.duration}</h1>
-                                        <h1>{exercise.date}</h1>
-                                    </div>
+                                    <>
+                                        <Card
+                                            description={exercise.description}
+                                            duration={exercise.duration}
+                                            date={exercise.date}
+                                        />
+                                    </>
                                 )
                             })
                         }
                     />
                     <Sidebar
-                        username={user.username.charAt(0).toUpperCase() + user.username.slice(1)}
-                    />
+                    username={user.username.charAt(0).toUpperCase() + user.username.slice(1)}
+                    >
+                    
+                        <CreateModal
+                         defaultValue={0}
+                         duration={duration}
+                         onNumberChange={duration => setDuration(duration)}
+                         descriptionValue={description}
+                         onChange={(e) => setDescription(e.target.value)}
+                         onClick={handleClose}
+                         show={show}
+                         handleShow={handleShow}
+                         onHide={handleClose}
+                         startDate={date}
+                         changeDate={(date) => setDate(date)}
+                         onSubmit={handleSubmit}
+                        />
+                    </Sidebar>
 
                 </div>
                 :

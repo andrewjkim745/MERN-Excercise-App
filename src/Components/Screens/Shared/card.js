@@ -14,7 +14,7 @@ export default function Card(props) {
                 </p>
                 <a href="#" class="btn btn-primary">Delete</a>
             </div>
-            <div class="card-footer text-muted">2 days ago</div>
+            <div class="card-footer text-muted">{props.date}</div>
         </div>
     )
 }

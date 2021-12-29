@@ -14,7 +14,7 @@ export default function CreateModal(props) {
 
     return (
         <>
-            <Button variant="primary" onClick={props.handleShow}>
+            <Button variant="primary" class={props.class} onClick={props.handleShow}>
                 CREATE ONE HERE
             </Button>
             <Modal show={props.show} onHide={props.onHide}>
