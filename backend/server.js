@@ -24,8 +24,7 @@ connection.once('open', () => {
 })
 const exercisesRouter = require('./routes/exercises');
 const usersRouter = require('./routes/users');
-// const User = require('./models/user.model');
-// const Exercise = require('./models/exercise.model');
+
 app.use('/exercises', exercisesRouter);
 app.use('/users', usersRouter);
 
@@ -55,19 +54,6 @@ app.post('/login', async (req, res) => {
             user.password
         )
     
-        // if (isPasswordValid) {
-        //     const userData = {
-        //         // {
-        //             username: user.username,
-        //             email: user.email,
-        //         }
-        //         // 'secret123'
-        //     // )
-    
-        //     return res.json({ status: 'ok', user: userData })
-        // } else {
-        //     return res.json({ status: 'error', user: false })
-        // }
         if (isPasswordValid) {
             const token = jwt.sign(
                 {
