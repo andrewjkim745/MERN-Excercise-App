@@ -31,7 +31,6 @@ export default function Home() {
         })
 
         const data = await req.json()
-        // console.log(data)
     }
 
 
@@ -119,7 +118,6 @@ export default function Home() {
                             </div>
 
                             :
-
                             exercises.map(exercise => {
                                 return (
                                     <>
@@ -131,7 +129,9 @@ export default function Home() {
                                     </>
                                 )
                             })
+                            
                         }
+                        
                     />
                     <Sidebar
                     username={user.username.charAt(0).toUpperCase() + user.username.slice(1)}
