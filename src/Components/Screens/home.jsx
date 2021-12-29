@@ -98,7 +98,8 @@ export default function Home() {
     return (
         <>
             {done ?
-                <div class='d-flex justify-content-center align-items-center' style={{ height: '100vh' }}>
+            <div class='row justify-content-center'>
+                <div class='col-6 align-self-end d-flex-column justify-content-center align-items-center' style={{ height: '100vh' }}>
                     <Exercises
                         exercises={exercises.length === 0 ?
                             <div class='text-center'>
@@ -155,6 +156,7 @@ export default function Home() {
                         />
                     </Sidebar>
 
+                </div>
                 </div>
                 :
                 <><h1>Not done rendering</h1></>
