@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require("path");
 const cors = require('cors');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
@@ -26,10 +27,10 @@ connection.once('open', () => {
 const exercisesRouter = require('./routes/exercises');
 const usersRouter = require('./routes/users');
 
-app.use('/exercises', exercisesRouter);
-app.use('/users', usersRouter);
+app.use('/api/exercises', exercisesRouter);
+app.use('/api/users', usersRouter);
 
-app.post('/register', async (req, res) => {
+app.post('/api/register', async (req, res) => {
     console.log(req.body)
     try {
         const newPassword = await bcrypt.hash(req.body.password, 10)
@@ -44,7 +45,7 @@ app.post('/register', async (req, res) => {
     }
 })
 
-app.post('/login', async (req, res) => {
+app.post('/api/login', async (req, res) => {
 
        const user = await db.User.findOne({ email: req.body.email })
         if (!user) {
@@ -72,7 +73,7 @@ app.post('/login', async (req, res) => {
         }
     })
 
-    app.get('/users', async (req, res) => {
+    app.get('/api/users', async (req, res) => {
         const token = req.headers['x-access-token']
     
         try {
@@ -87,7 +88,7 @@ app.post('/login', async (req, res) => {
         }
     })
 
-    app.post('/users/:id', async (req, res) => {
+    app.post('/api/users/:id', async (req, res) => {
         db.Exercise.create(req.body)
             .then(function(dbExercise) {
                 return db.User.findOneAndUpdate({_id: req.params.id }, {$push: {exercises: dbExercise._id}}, { new: true});
@@ -100,7 +101,7 @@ app.post('/login', async (req, res) => {
             })
     })
 
-    app.get('/users/:id', async (req, res) => {
+    app.get('/api/users/:id', async (req, res) => {
         db.User.findOne({_id: req.params.id })
         .populate('exercises')
         .then(function(dbUser) {
@@ -110,7 +111,15 @@ app.post('/login', async (req, res) => {
             res.json(err)
         })
     })
-    
+    if (process.env.NODE_ENV === "production") {
+        // Express will serve up production assets
+        app.use(express.static("build"));
+      
+        // Express will serve up the front-end index.html file if it doesn't recognize the route
+        app.get("*", (req, res) =>
+          res.sendFile(path.resolve("build", "index.html"))
+        );
+      }
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`)
 })
