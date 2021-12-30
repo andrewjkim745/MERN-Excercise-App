@@ -111,6 +111,8 @@ export default function Home() {
 
 
     useEffect(() => {
+        const base_url = window.location.origin;
+        console.log(base_url)
         const token = localStorage.getItem('token')
         if (token) {
             const user = jwt_decode(token)
