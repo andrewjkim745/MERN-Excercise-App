@@ -24,7 +24,7 @@ export default function CreateModal(props) {
                 <Modal.Body>
                     <form>
                         <div class="form-group mb-4">
-                            <h5>Exercise Duration</h5>
+                            <h5>Exercise Duration (in Minutes)</h5>
                             <NumberPicker value={props.duration} onChange={props.onNumberChange} defaultValue={props.defaultValue} />
                         </div>
                         <div class="form-group mb-4">

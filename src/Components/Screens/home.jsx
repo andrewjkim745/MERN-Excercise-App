@@ -5,11 +5,14 @@ import Sidebar from './Shared/sidebar'
 import jwt_decode from "jwt-decode";
 import CreateModal from './Shared/modal'
 import Card from './Shared/card'
+import SideNav from './Shared/sidenav'
+import Hamburger from './Shared/hamburger'
 
 export default function Home() {
 
 
     const navigate = useNavigate();
+    const [sideNav, setSideNav ] = useState(false)
     const [updated, setUpdated] = useState(false)
     const [duration, setDuration] = useState(0)
     const [show, setShow] = useState(false);
@@ -98,8 +101,27 @@ export default function Home() {
     return (
         <>
             {done ?
+            <>
+            <Hamburger>
+            <CreateModal
+                                    defaultValue={0}
+                                    duration={duration}
+                                    onNumberChange={duration => setDuration(duration)}
+                                    descriptionValue={description}
+                                    onChange={(e) => setDescription(e.target.value)}
+                                    onClick={handleClose}
+                                    show={show}
+                                    handleShow={handleShow}
+                                    onHide={handleClose}
+                                    startDate={date}
+                                    changeDate={(date) => setDate(date)}
+                                    onSubmit={handleSubmit}
+                                />
+            </Hamburger>
             <div class='row justify-content-center'>
-                <div class='col-6 align-self-end d-flex-column justify-content-center align-items-center' style={{ height: '100vh' }}>
+            <h1 class='text-center my-5'>Your Exercises</h1>
+
+                <div class='col-md-6 col-sm-12 align-self-end d-flex-column justify-content-center align-items-center' style={{ height: '100vh' }}>
                     <Exercises
                         exercises={exercises.length === 0 ?
                             <div class='text-center'>
@@ -136,10 +158,11 @@ export default function Home() {
                         }
                         
                     />
+                    
                     <Sidebar
                     username={user.username.charAt(0).toUpperCase() + user.username.slice(1)}
                     >
-                    
+
                         <CreateModal
                          defaultValue={0}
                          duration={duration}
@@ -158,6 +181,7 @@ export default function Home() {
 
                 </div>
                 </div>
+                </>
                 :
                 <><h1>Not done rendering</h1></>
             }
