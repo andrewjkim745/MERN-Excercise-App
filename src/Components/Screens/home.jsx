@@ -7,6 +7,7 @@ import CreateModal from './Shared/modal'
 import UpdateModal from './Shared/updateModal'
 import Card from './Shared/card'
 import Hamburger from './Shared/hamburger'
+import ReactLoading from 'react-loading';
 
 export default function Home() {
 
@@ -224,7 +225,9 @@ export default function Home() {
                     </div>
                 </>
                 :
-                <><h1>Not done rendering</h1></>
+                <ReactLoading
+                type={'spin'} color={'blue'} height={'20%'} width={'20%'}
+                />
             }
 
         </>
