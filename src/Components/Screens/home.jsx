@@ -41,7 +41,7 @@ export default function Home() {
     }
 
     async function handleDestroy(exercise) {
-        const response = await fetch(`/exercises/${exercise._id}`, {
+        const response = await fetch(`https://mern-exer.herokuapp.com/exercises/${exercise._id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -53,7 +53,7 @@ export default function Home() {
     }
 
     async function handleUpdate(exercise) {
-        const response = await fetch(`/exercises/update/${exercise._id}`, {
+        const response = await fetch(`https://mern-exer.herokuapp.com/exercises/update/${exercise._id}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -72,7 +72,7 @@ export default function Home() {
 
     async function handleSubmit(event) {
         event.preventDefault()
-        const response = await fetch(`/users/${user.id}`, {
+        const response = await fetch(`https://mern-exer.herokuapp.com/users/${user.id}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -97,7 +97,7 @@ export default function Home() {
     }
 
     async function getExercises(user) {
-        const response = await fetch(`/users/${user.id}`, {
+        const response = await fetch(`https://mern-exer.herokuapp.com/users/${user.id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
