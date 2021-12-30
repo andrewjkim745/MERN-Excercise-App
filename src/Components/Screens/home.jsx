@@ -12,6 +12,9 @@ export default function Home() {
 
 
     const navigate = useNavigate();
+    const [updateShow, setUpdateShow] = useState(false);
+    const handleUpdateClose = () => setUpdateShow(false);
+    const handleUpdateShow = () => setUpdateShow(true);
     const [deleted, setDeleted] = useState(false)
     const [updated, setUpdated] = useState(false)
     const [duration, setDuration] = useState(0)
@@ -63,6 +66,7 @@ export default function Home() {
         })
         setUpdated(!updated)
         alert('update successful')
+        handleUpdateClose()
     }
 
 
@@ -185,10 +189,10 @@ export default function Home() {
                                                         onNumberChange={duration => setDuration(duration)}
                                                         descriptionValue={description}
                                                         onChange={(e) => setDescription(e.target.value)}
-                                                        onClick={handleClose}
-                                                        show={show}
-                                                        handleShow={handleShow}
-                                                        onHide={handleClose}
+                                                        onClick={handleUpdateClose}
+                                                        show={updateShow}
+                                                        handleShow={handleUpdateShow}
+                                                        onHide={handleUpdateClose}
                                                         startDate={date}
                                                         changeDate={(date) => setDate(date)}
                                                         onSubmit={() => handleUpdate(exercise)} />

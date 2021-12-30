@@ -17,7 +17,7 @@ export default function UpdateModal(props) {
             <a onClick={props.handleShow} class="btn btn-info"><i class="far fa-edit fa-fw me-3"></i>Update</a>
             <Modal show={props.show} onHide={props.onHide}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Update Your Exercise!</Modal.Title>
+                    <Modal.Title>Update Your Exercise</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form>
