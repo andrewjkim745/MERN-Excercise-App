@@ -31,7 +31,7 @@ export default function Home() {
 
     async function populateUser() {
 
-        const req = await fetch('http://localhost:5000/users', {
+        const req = await fetch('https://mern-exer.herokuapp.com/users', {
             headers: {
                 'x-access-token': localStorage.getItem('token'),
             },
@@ -41,7 +41,7 @@ export default function Home() {
     }
 
     async function handleDestroy(exercise) {
-        const response = await fetch(`http://localhost:5000/exercises/${exercise._id}`, {
+        const response = await fetch(`https://mern-exer.herokuapp.com/exercises/${exercise._id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -53,7 +53,7 @@ export default function Home() {
     }
 
     async function handleUpdate(exercise) {
-        const response = await fetch(`http://localhost:5000/exercises/update/${exercise._id}`, {
+        const response = await fetch(`https://mern-exer.herokuapp.com/exercises/update/${exercise._id}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -72,7 +72,7 @@ export default function Home() {
 
     async function handleSubmit(event) {
         event.preventDefault()
-        const response = await fetch(`http://localhost:5000/users/${user.id}`, {
+        const response = await fetch(`https://mern-exer.herokuapp.com/users/${user.id}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -97,7 +97,7 @@ export default function Home() {
     }
 
     async function getExercises(user) {
-        const response = await fetch(`http://localhost:5000/users/${user.id}`, {
+        const response = await fetch(`https://mern-exer.herokuapp.com/users/${user.id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
