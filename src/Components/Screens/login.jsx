@@ -16,10 +16,10 @@ export default function Login() {
             new mdb.Input(formOutline).init();
         });
     }, [])
-
+    // https://mern-exer.herokuapp.com
     async function registerUser(event) {
         event.preventDefault()
-        const response = await fetch('https://mern-exer.herokuapp.com/register', {
+        const response = await fetch('/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -41,7 +41,7 @@ export default function Login() {
 
     async function loginUser(event) {
         event.preventDefault()
-        const response = await fetch('https://mern-exer.herokuapp.com/login', {
+        const response = await fetch('/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
