@@ -53,7 +53,7 @@ export default function Home() {
     }
 
     async function handleUpdate(exercise) {
-        const response = await fetch(`https://mern-exer.herokuapp.com/exercises/api/update/${exercise._id}`, {
+        const response = await fetch(`https://mern-exer.herokuapp.com/api/exercises/update/${exercise._id}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
