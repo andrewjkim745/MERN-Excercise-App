@@ -16,9 +16,7 @@ export default function SideNav(props) {
                     <button class="btn btn-link btn-block m-0">Link 3</button>
                 </div>
             </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+            
         </>
     )
 }
