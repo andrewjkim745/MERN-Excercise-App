@@ -4,6 +4,10 @@ Started as a refresher to making full stack applications  after taking a long br
 
 
 
+Website deployed at: https://mern-exer.herokuapp.com/
+
+
+
 
 
 
@@ -38,3 +42,7 @@ Deliverables
 
 
 [x] Make Front End
+
+
+
+
