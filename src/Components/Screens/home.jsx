@@ -85,12 +85,12 @@ export default function Home() {
         })
 
         const data = await response.json()
-        console.log(data.exercises)
+        
         if (data) {
             alert('Create exercise success')
             handleClose()
             setUpdated(!updated)
-            console.log('updated')
+            
         } else {
             alert('Create exercise failed')
         }
@@ -112,7 +112,6 @@ export default function Home() {
 
     useEffect(() => {
         const base_url = window.location.origin;
-        console.log(base_url)
         const token = localStorage.getItem('token')
         if (token) {
             const user = jwt_decode(token)
@@ -167,7 +166,7 @@ export default function Home() {
                                     </div>
                                     :
                                     exercises.map(exercise => {
-                                        console.log(exercise)
+                                        
                                         return (
                                             <>
                                                 <Card
