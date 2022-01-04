@@ -173,7 +173,7 @@ export default function Home() {
                                                     delete={() => handleDestroy(exercise)}
                                                     description={exercise.description}
                                                     duration={exercise.duration}
-                                                    date={exercise.date}
+                                                    date={new Intl.DateTimeFormat().format(exercise.date)}
                                                 >
                                                     <UpdateModal
                                                         defaultValue={0}
