@@ -174,7 +174,7 @@ export default function Home() {
                                                     delete={() => handleDestroy(exercise)}
                                                     description={exercise.description}
                                                     duration={exercise.duration}
-                                                    date={exercise.date}
+                                                    date={exercise.date.toISOString()}
                                                 >
                                                     <UpdateModal
                                                         defaultValue={0}
