@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './sidebar.css'
 import { useNavigate } from 'react-router-dom'
 
-// const icons = ['fas fa-font', 'fas fa-bold', 'fab fa-cuttlefish', 'fab fa-dyalog',  ]
+
 export default function Sidebar(props) {
   const navigate = useNavigate();
 
