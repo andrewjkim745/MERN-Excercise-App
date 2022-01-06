@@ -211,7 +211,6 @@ export default function Home() {
                 type={'spin'} color={'blue'} height={'20%'} width={'20%'}
                 />
             }
-
         </>
     )
 }
