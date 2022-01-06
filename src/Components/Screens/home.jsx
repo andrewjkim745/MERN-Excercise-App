@@ -28,13 +28,11 @@ export default function Home() {
 
 
     async function populateUser() {
-
         const req = await fetch('/users', {
             headers: {
                 'x-access-token': localStorage.getItem('token'),
             },
         })
-
         const data = await req.json()
     }
 
@@ -66,7 +64,6 @@ export default function Home() {
         alert('update successful')
         handleUpdateClose()
     }
-
 
     async function handleSubmit(event) {
         event.preventDefault()
@@ -103,10 +100,7 @@ export default function Home() {
         })
         const data = await response.json()
         setExercises([...data.exercises])
-       
-
     }
-
 
     useEffect(() => {
         const base_url = window.location.origin;
@@ -164,7 +158,6 @@ export default function Home() {
                                     </div>
                                     :
                                     exercises.map(exercise => {
-                                        
                                         return (
                                             <>
                                                 <Card

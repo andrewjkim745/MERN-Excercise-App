@@ -16,7 +16,6 @@ export default function Card(props) {
                         <div class='col-lg-8 col-md-6 mt-2'>
                             {props.children}
                         </div>
-
                     </div>
                 </div>
             </div>
