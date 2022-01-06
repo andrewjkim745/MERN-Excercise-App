@@ -6,7 +6,6 @@ export default function SideNav(props) {
         <>
             <nav class="navbar navbar-light bg-light">
                 <div class="container-fluid">
-
                 </div>
             </nav>
             <div class="collapse" id="navbarToggleExternalContent">

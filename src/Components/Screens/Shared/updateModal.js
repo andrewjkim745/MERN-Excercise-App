@@ -10,8 +10,6 @@ window.mdb = mdb;
 
 export default function UpdateModal(props) {
 
-
-
     return (
         <>
             <a onClick={props.handleShow} class="btn btn-info"><i class="far fa-edit fa-fw me-3"></i>Update</a>

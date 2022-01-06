@@ -11,8 +11,6 @@ import ReactLoading from 'react-loading';
 
 export default function Home() {
 
-
-    const navigate = useNavigate();
     const [updateShow, setUpdateShow] = useState(false);
     const handleUpdateClose = () => setUpdateShow(false);
     const handleUpdateShow = () => setUpdateShow(true);
