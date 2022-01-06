@@ -16,7 +16,7 @@ export default function Login() {
             new mdb.Input(formOutline).init();
         });
     }, [])
-    // https://mern-exer.herokuapp.com
+    
     async function registerUser(event) {
         event.preventDefault()
         const response = await fetch('https://mern-exer.herokuapp.com/api/register', {
@@ -53,7 +53,7 @@ export default function Login() {
         })
 
         const data = await response.json()
-        console.log(data.user)
+        
         if(data.user) {
             
             localStorage.setItem('token', data.user)

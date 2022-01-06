@@ -31,7 +31,7 @@ app.use('/api/exercises', exercisesRouter);
 app.use('/api/users', usersRouter);
 
 app.post('/api/register', async (req, res) => {
-    console.log(req.body)
+    
     try {
         const newPassword = await bcrypt.hash(req.body.password, 10)
         await db.User.create({
@@ -46,7 +46,7 @@ app.post('/api/register', async (req, res) => {
 })
 
 app.post('/api/login', async (req, res) => {
-    console.log(req.body)
+   
        const user = await db.User.findOne({ email: req.body.email })
         if (!user) {
             return { status: 'error', error: 'Invalid login' }
