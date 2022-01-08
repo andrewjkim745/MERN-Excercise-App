@@ -64,7 +64,6 @@ export default function Login() {
         }
     }
 
-
     return (
         <section class="vh-100">
             <div class="container py-5 h-100">
